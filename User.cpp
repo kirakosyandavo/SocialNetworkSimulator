@@ -1,4 +1,5 @@
-#include"User.h" 
+#include"User.h"
+using namespace std; 
 int User::m_id=0;
 void User::addFriend(int friendId){
   friends.push_back(friendId);

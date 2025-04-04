@@ -1,4 +1,7 @@
 #include"Post.h"
+#include"Comment.h"
+#include"User.h"
+using namespace std;
 int Post::p_id=0;
 Post::Post(const string& content){
  id=++p_id;

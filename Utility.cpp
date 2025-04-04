@@ -1,5 +1,6 @@
 #include"Utility.h"
-bool Utility::isvalidEmail(const string &email){
+using namespace std;
+bool Utility::isvalidEmail(const std::string& email){
     int flag=1;
     for(int i=0;i<email.size();i++){
         if(email[i]=='@'){

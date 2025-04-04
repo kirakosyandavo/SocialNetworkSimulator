@@ -1,4 +1,5 @@
 #include"Network.h"
+using namespace std;
 int main() {
     try {
         Network network;

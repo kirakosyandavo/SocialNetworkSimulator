@@ -1,7 +1,8 @@
 #ifndef COMMENT
 #define COMMENT
-#include"User.h"
-using namespace std;
+#include<iostream>
+#include<ctime>
+class User;
 class Comment{
     public:
 Comment(const string & username,const string& content);

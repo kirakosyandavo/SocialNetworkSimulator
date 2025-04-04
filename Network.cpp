@@ -1,20 +1,31 @@
 #include"Network.h"
+#include<algorithm>
+using namespace std;
 std::shared_ptr<User> Network::createUser(const string& username, const string& email, const string& profileDescription){
     auto user=make_shared<User>(username,email,profileDescription);
   users.push_back(user);
   cout<<"User add succesfully"<<endl;
   return user;
 }
-void Network::deleteUser(int userId){
-    for(int i=0;i<users.size();i++){
-        if(users[i]->getId()==userId){
-            users.erase(users.begin()+i);
-            cout<<"User is deleted"<<endl;
-            return;
-        }
-    }
-    cout<<"there is no such user"<<endl;
+void Network::deleteUser(int userId) {
+    friendRequests.erase(std::remove_if(friendRequests.begin(), friendRequests.end(),
+        [userId](const std::pair<int, int>& req) {
+            return req.first == userId || req.second == userId;
+        }),
+        friendRequests.end()
+    );
 
+    auto it = std::remove_if(users.begin(), users.end(),
+        [userId](const std::shared_ptr<User>& user) {
+            return user->getId() == userId;
+        });
+
+    if (it != users.end()) {
+        users.erase(it, users.end());
+        std::cout << "User deleted successfully." << std::endl;
+    } else {
+        std::cout << "There is no such user." << std::endl;
+    }
 }
 shared_ptr<User> Network::getUserById(int userId) const{
     for(int i{};i<users.size();i++){
@@ -67,8 +78,8 @@ void Network::acceptFriendRequest(int fromUserId, int toUserId){
         if(friendRequests[i].first==fromUserId){
             if(friendRequests[i].second==toUserId){
                 friendRequests.erase(friendRequests.begin()+i);
-                   fromuser->addFriend(fromUserId);
-                   touser->addFriend(toUserId);
+                   fromuser->addFriend(toUserId);
+                   touser->addFriend(fromUserId);
                    cout<<"they are accepted";
                    return ;
             } 

@@ -1,4 +1,5 @@
 #include"Comment.h"
+using namespace std;
 Comment::Comment(const string& username,const string& content){
  m_username=username;
  m_content=content;

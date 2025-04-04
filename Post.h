@@ -1,9 +1,10 @@
 #ifndef POST
 #define POST
-using namespace std;
-#include"Comment.h"
-#include"User.h"
+#include<iostream>
+#include<ctime>
+#include<vector>
 class Comment;
+class User;
 class Post{
 public:
  Post(const string& content);
